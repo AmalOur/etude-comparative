@@ -18,6 +18,8 @@ This project provides a comparative analysis of **Eureka** and **Consul** for se
 
 
 The application is designed with the following components:  
+![image](https://github.com/user-attachments/assets/438b2c87-728e-4a99-a374-bf82850a4e5c)
+
 - **Service Clients** (Feign, RestTemplate, and WebClient) for communication between services.  
 - **Discovery Servers**:  
   - Eureka: A Netflix OSS-based solution.  
