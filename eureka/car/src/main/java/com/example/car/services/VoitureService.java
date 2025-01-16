@@ -4,6 +4,7 @@ import com.example.car.entities.Voiture;
 import com.example.car.repositories.VoitureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -12,6 +13,13 @@ public class VoitureService {
 
     @Autowired
     private VoitureRepository voitureRepository;
+
+    private final WebClient.Builder webClientBuilder;
+
+    @Autowired
+    public VoitureService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
 
     public Voiture enregistrerVoiture(Voiture voiture) {
         return voitureRepository.save(voiture);
@@ -40,5 +48,14 @@ public class VoitureService {
         return voitureRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Voiture not found with ID: " + id));
     }
-}
 
+    public List<Voiture> recupererVoituresExterne() {
+        return webClientBuilder.build()
+                .get()
+                .uri("http://SERVICE-CLIENT/api/client")
+                .retrieve()
+                .bodyToFlux(Voiture.class)
+                .collectList()
+                .block();
+    }
+}

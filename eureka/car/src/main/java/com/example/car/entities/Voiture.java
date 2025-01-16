@@ -66,7 +66,7 @@ public class Voiture {
         return id_client;
     }
 
-    public void setId_client(Long id_client) {
+    public void setId_client (Long id_client) {
         this.id_client = id_client;
     }
 

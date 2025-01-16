@@ -18,9 +18,9 @@ public class ClientApplication {
 	@Bean
 	CommandLineRunner initialiserBaseH2(ClientRepository clientRepository) {
 		return args -> {
-			clientRepository.save(new Client(null, "Rabab SELIMANI", 23f));
-			clientRepository.save(new Client(null, "Amal RAMI", 22f));
-			clientRepository.save(new Client(null, "Samir SAFI", 22f));
+			clientRepository.save(new Client(1L, "Rabab SELIMANI", 23f));
+			clientRepository.save(new Client(2L, "Amal RAMI", 22f));
+			clientRepository.save(new Client(3L, "Samir SAFI", 22f));
 
 		};
 	}

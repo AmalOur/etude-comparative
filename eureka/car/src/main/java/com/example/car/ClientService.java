@@ -1,13 +1,23 @@
-package com.example.car;
+package com.example.car.services;
 
 import com.example.car.entities.Client;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
-@FeignClient(name = "Client")
-public interface ClientService {
+@Service
+public class ClientService {
 
-    @GetMapping("/client/{id}")
-    Client clientById(@PathVariable Long id);
+    private final WebClient webClient;
+
+    public ClientService(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder.baseUrl("http://CLIENT-SERVICE").build();
+    }
+
+    public Client clientById(Long id) {
+        return webClient.get()
+                .uri("/client/{id}", id)
+                .retrieve()
+                .bodyToMono(Client.class)
+                .block();
+    }
 }
