@@ -1,30 +1,28 @@
 package com.example.client.controllers;
 
 import com.example.client.entities.Client;
-import com.example.client.services.ClientService;
+import com.example.client.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/client")
 public class ClientController {
     @Autowired
-    private ClientService service;
+    ClientRepository clientRepository;
 
-    @GetMapping
-    public List<Client> findAll() {
-        return service.findAll();
+    @GetMapping("/clients")
+    public List<Client> findA1l() {
+        return clientRepository.findAll();
+
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/client/{id}")
     public Client findById(@PathVariable Long id) throws Exception {
-        return service.findById(id);
-    }
-
-    @PostMapping
-    public void save(@RequestBody Client client) {
-        service.addClient(client);
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new Exception("Client non trouve"));
     }
 }
