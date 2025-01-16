@@ -9,8 +9,7 @@ This project provides a comparative analysis of **Eureka** and **Consul** for se
 1. [Architecture](#architecture)  
 2. [Branches](#branches)  
 3. [Performance Analysis](#performance-analysis)  
-4. [Getting Started](#getting-started)  
-5. [Contributors](#contributors)  
+4. [Contributors](#contributors)  
 
 ---
 
@@ -66,24 +65,6 @@ git checkout <branch-name>
 ### Key Observations  
 - **WebClient** consistently outperforms the other clients in terms of response time and throughput.  
 - Resource consumption is slightly higher with Consul compared to Eureka.  
-
----
-
-## Getting Started  
-
-### Local Setup  
-Clone the repository:  
-```bash  
-git clone https://github.com/AmalOur/etude-comparative-service.git  
-cd etude-comparative-service  
-```  
-
-Start the services:  
-```bash  
-docker-compose up --build  
-```  
-
-Access the services  
 
 ---
 
